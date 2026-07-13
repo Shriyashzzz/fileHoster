@@ -10,7 +10,10 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import prisma from "./config/prisma";
 import loginRouter from "./routers/loginRouter";
 import signUpRouter from "./routers/signUpRouter";
-const app = express();
+import fileUploadRouter from "./routers/fileUploadRouter";
+import multer from "multer";
+export const upload = multer({ dest: "uploads/" });
+export const app = express();
 
 app.use(
   session({
@@ -43,6 +46,7 @@ passport.deserializeUser(deserializer as any);
 app.use("/", homeRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signUpRouter);
+app.use("/fileUpload", upload.array("givenFile"), fileUploadRouter);
 app.listen(config.port, () => {
   console.log(`Live: http://localhost:${config.port}`);
 });
