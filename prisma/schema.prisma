@@ -12,10 +12,24 @@ datasource db {
   provider = "postgresql"
 }
 
+model Users {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  role      Role     @default(USER)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
 /// session schema used by prisma-session-store
 model Session {
   id        String   @id
   sid       String   @unique
-  data      String   @db.MediumText  // MediumText may be needed for MySql
-  expiresAt   DateTime
+  data      String
+  expiresAt DateTime
 }

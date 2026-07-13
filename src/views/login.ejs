@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+  </head>
+  <body>
+    <div class="authContainer">
+      <form action="/login" method="POST">
+        <label for="username"> Username: </label>
+        <input
+          type="text"
+          placeholder="Ex: John"
+          name="username"
+          id="username"
+        />
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+        <button type="submit">Log In</button>
+      </form>
+
+      <div class="anchorContainer">
+        <p>Don't have an account?</p>
+        <a href="/signup">Sign Up</a>
+      </div>
+    </div>
+  </body>
+</html>

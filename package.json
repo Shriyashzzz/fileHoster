@@ -15,18 +15,23 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "@quixo3/prisma-session-store": "^3.1.21",
     "@types/express-session": "^1.19.0",
+    "bcryptjs": "^3.0.3",
     "ejs": "^6.0.1",
     "express-session": "^1.19.0",
     "express-validator": "^7.3.2",
     "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pg": "^8.22.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^26.1.1",
     "@types/passport": "^1.0.17",
+    "@types/passport-local": "^1.0.38",
     "dotenv": "^17.4.2",
     "eslint": "^10.6.0",
     "express": "^5.2.1",
@@ -34,6 +39,7 @@
     "nodemon": "^3.1.14",
     "npm": "^12.0.0",
     "prettier": "^3.9.5",
+    "prisma": "^7.8.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.0",
     "typescript": "^7.0.2"
