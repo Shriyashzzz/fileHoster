@@ -11,8 +11,6 @@ import prisma from "./config/prisma";
 import loginRouter from "./routers/loginRouter";
 import signUpRouter from "./routers/signUpRouter";
 import fileUploadRouter from "./routers/fileUploadRouter";
-import multer from "multer";
-export const upload = multer({ dest: "uploads/" });
 export const app = express();
 
 app.use(
@@ -46,7 +44,7 @@ passport.deserializeUser(deserializer as any);
 app.use("/", homeRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signUpRouter);
-app.use("/fileUpload", upload.array("givenFile"), fileUploadRouter);
+app.use("/fileUpload", fileUploadRouter);
 app.listen(config.port, () => {
   console.log(`Live: http://localhost:${config.port}`);
 });

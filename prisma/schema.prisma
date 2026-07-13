@@ -21,6 +21,24 @@ model Users {
   role      Role     @default(USER)
 }
 
+model Folder {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  fileName  String     @unique
+  indvFiles IndvFile[]
+}
+
+model IndvFile {
+  id         Int      @id @default(autoincrement())
+  uploadTime DateTime @default(now())
+  fileName   String?  @unique
+  path       String   @unique
+  size       Int?
+  mimetype   String
+  FolderId   Int
+  Folder     Folder   @relation(fields: [FolderId], references: [id])
+}
+
 enum Role {
   USER
   ADMIN
