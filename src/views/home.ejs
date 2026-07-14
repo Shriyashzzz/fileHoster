@@ -6,6 +6,11 @@
     <title>Document</title>
   </head>
   <body>
-    wleocme to home page <%- include('./partials/uploadFiles.ejs') %>
+    welocme to home page <%- include('./partials/uploadFiles.ejs') %>
+    <main><%- include('./partials/folders.ejs') %></main>
   </body>
 </html>
+
+<script>
+  let currentFolderId = "<%= universalId %>";
+</script>

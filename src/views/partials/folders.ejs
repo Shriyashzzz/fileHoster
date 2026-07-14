@@ -1,0 +1,24 @@
+<div class = "folders">
+    <% if (locals.folders) { %>
+        <% folders.map((folder)=>{%>
+            <div class ="folder" data-folderid = <%= folder.id %>> 
+                <h4><%= folder.fileName %></h4>
+            </div>
+         <%  }) %>
+     
+    <% } %>
+ </div>
+
+<script>
+    const folders = document.querySelectorAll(".folder")
+    folders.forEach((folder) =>{
+        folder.addEventListener("click", (async()=>{
+            currentFolderId = folder.dataset.folderid;
+            const folderId = folder.dataset.folderid;
+            const response = await fetch(`/getFiles/${folderId}`, {
+                method: "GET"
+            })
+                
+            }))
+    })
+</script>

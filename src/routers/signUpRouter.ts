@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { Router } from "express";
 import type { Request, Response } from "express";
 import { validationResult, matchedData, body } from "express-validator";
-import prisma from "../config/prisma";
+import prisma from "../controllers/config/prisma";
 const signUpRouter = Router();
 
 signUpRouter.get("/", (req: Request, res: Response) => {

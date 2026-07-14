@@ -2,16 +2,21 @@ import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import multer from "multer";
 export const upload = multer({ dest: "uploads/" });
-import prisma from "../config/prisma";
-
-const fileUploadRouter = Router();
+import prisma from "../controllers/config/prisma";
+import authCheckerMiddleware from "../middlewares/checkIfAuth";
+const fileUploadRouter = Router({ mergeParams: true });
 fileUploadRouter.post(
   "/",
+  authCheckerMiddleware,
   upload.single("givenFile"),
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { folderId } = req.body || 1;
-
-    console.log(req.file);
+  async (
+    req: Request<{ folderId: string }>,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    if (!req.user) return res.status(401).send("Not authenticated");
+    const { folderId } = req.params;
+    const id = parseInt(folderId);
     if (req.file) {
       try {
         await prisma.indvFile.create({
@@ -20,7 +25,8 @@ fileUploadRouter.post(
             path: req.file.path,
             size: req.file.size,
             mimetype: req.file.mimetype,
-            FolderId: folderId,
+            folderId: id,
+            userId: req.user.id,
           },
         });
       } catch (e) {

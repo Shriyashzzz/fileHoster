@@ -8,6 +8,6 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: env("DATABASE_URL"),
+    url: env("DATABASE_URL"), //this connection is only for prisma client generation and migration, make another connection for CRUD operations
   },
 });

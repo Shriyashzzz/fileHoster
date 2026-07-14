@@ -1,4 +1,22 @@
-<form action="/fileupload" method="post" enctype="multipart/form-data">
+<form
+  action="/fileupload"
+  id="uploadForm"
+  method="post"
+  enctype="multipart/form-data"
+>
   <input type="file" id="givenFile" name="givenFile" />
-  <button type="submit">Upload</button>
+  <button class="uploadButton" type="submit">Upload</button>
 </form>
+
+<script>
+  const uploadForm = document.querySelector("#uploadForm");
+  const uploadButton = document.querySelector(".uploadButton");
+  uploadButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(uploadForm);
+    const response = await fetch(`/fileupload/${currentFolderId}`, {
+      method: "POST",
+      body: formData,
+    });
+  });
+</script>

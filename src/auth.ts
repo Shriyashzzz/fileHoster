@@ -1,6 +1,6 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
-import prisma from "./config/prisma";
+import prisma from "./controllers/config/prisma";
 import type { Users } from "./generated/prisma/client";
 
 const localStrat = new LocalStrategy(async (username, password, done) => {
