@@ -13,12 +13,16 @@ fileRouter.get(
       return res.sendStatus(500);
     }
     const intFolderId = parseInt(folderId);
-    const files = await queries.getFolderFiles(parseInt(folderId));
-    res.render("home.ejs", {
-      folders: await queries.getFolders(),
-      files: await queries.getFolderFiles(intFolderId),
-      universalId: intFolderId, // send the currentid to be default back on rerender
-    });
+    if (await queries.checkIfFolderExists(intFolderId)) {
+      const files = await queries.getFolderFiles(parseInt(folderId));
+      res.render("home.ejs", {
+        folders: await queries.getFolders(),
+        files: await queries.getFolderFiles(intFolderId),
+        universalId: intFolderId, // send the currentid to be default back on rerender
+      });
+    } else {
+      res.sendStatus(400);
+    }
   },
 );
 

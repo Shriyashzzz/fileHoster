@@ -20,6 +20,17 @@ class Queries {
     const firstId = await prisma.folder.findFirst();
     return firstId?.id;
   }
+  async checkIfFolderExists(folderId: number): Promise<Boolean> {
+    const folder = await prisma.folder.findUnique({
+      where: {
+        id: folderId,
+      },
+    });
+    if (folder) {
+      return true;
+    }
+    return false;
+  }
 }
 
 const queries = new Queries();

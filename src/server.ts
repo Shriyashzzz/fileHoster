@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { Request, Response, Errback, NextFunction } from "express";
 import express from "express";
 import config from "./controllers/config/config";
 import session from "express-session";
@@ -47,6 +47,10 @@ app.use("/login", loginRouter);
 app.use("/signup", signUpRouter);
 app.use("/fileUpload/:folderId", fileUploadRouter);
 app.use("/getFiles/:folderId", fileRouter);
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+  res.send("Server Error: Please Try Again Later");
+});
 app.listen(config.port, () => {
   console.log(`Live: http://localhost:${config.port}`);
 });
