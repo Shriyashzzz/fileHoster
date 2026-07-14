@@ -10,7 +10,10 @@ class Queries {
     return files;
   }
   async getFolderFiles(folderId: number) {
-    const files = await prisma.indvFile.findMany({ where: { id: folderId } });
+    const files = await prisma.indvFile.findMany({
+      where: { folderId: folderId },
+    });
+
     return files;
   }
   async getUniversalId() {

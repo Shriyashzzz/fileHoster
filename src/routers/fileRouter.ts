@@ -17,7 +17,7 @@ fileRouter.get(
     res.render("home.ejs", {
       folders: await queries.getFolders(),
       files: await queries.getFolderFiles(intFolderId),
-      universalId: intFolderId, // rn we are changing the universl folder id after user clicks on it
+      universalId: intFolderId, // send the currentid to be default back on rerender
     });
   },
 );

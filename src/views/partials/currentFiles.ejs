@@ -1,0 +1,10 @@
+
+<% if (locals.files.length != 0) { %>
+    <% files.map((file) => { %>
+        <div><%= file.fileName%></div>
+    <% }) %>
+    
+<% }else{ %>
+    <div><h3>File is empty</h3></div>
+<% } %>
+    
