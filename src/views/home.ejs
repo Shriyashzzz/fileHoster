@@ -8,7 +8,11 @@
   <body>
     welocme to home page <%- include('./partials/uploadFiles.ejs') %>
     <main>
-      <%-include('./partials/folders.ejs') %>
+      <section>
+        <%-include('./partials/addFolderDialog.ejs') %>
+        <%-include('./partials/folders.ejs') %>
+      </section>
+
       <section><%- include('./partials/currentFiles.ejs') %></section>
     </main>
   </body>

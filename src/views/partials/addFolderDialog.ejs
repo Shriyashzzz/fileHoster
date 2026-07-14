@@ -1,0 +1,28 @@
+<div>
+  <button
+    type="button"
+    command="show-modal"
+    commandfor="newFolderDialog"
+    class="fileButton"
+  >
+    New Folder...
+  </button>
+</div>
+<dialog id="newFolderDialog">
+  <button commandfor="newFolderDialog" command="close" class="fileButton">
+    X
+  </button>
+
+  <form action="/newFolder" method="post">
+    <legend>Add a new folder</legend>
+    <label for="folderNameInput">Folder Name: </label>
+    <input
+      type="text"
+      id="folderNameInput"
+      name="folderName"
+      required
+      minlength="1"
+    />
+    <button type="submit">Make a new Folder</button>
+  </form>
+</dialog>

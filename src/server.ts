@@ -12,6 +12,7 @@ import loginRouter from "./routers/loginRouter";
 import signUpRouter from "./routers/signUpRouter";
 import fileUploadRouter from "./routers/fileUploadRouter";
 import fileRouter from "./routers/fileRouter";
+import newFolderRouter from "./routers/newFolderRouter";
 export const app = express();
 
 app.use(
@@ -47,6 +48,7 @@ app.use("/login", loginRouter);
 app.use("/signup", signUpRouter);
 app.use("/fileUpload/:folderId", fileUploadRouter);
 app.use("/getFiles/:folderId", fileRouter);
+app.use("/newFolder", newFolderRouter);
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
   res.send("Server Error: Please Try Again Later");

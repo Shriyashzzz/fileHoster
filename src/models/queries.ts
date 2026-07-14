@@ -1,4 +1,5 @@
 import prisma from "../controllers/config/prisma";
+import type { Folder } from "../generated/prisma/client";
 class Queries {
   async getFolders() {
     const folders = await prisma.folder.findMany();
@@ -30,6 +31,13 @@ class Queries {
       return true;
     }
     return false;
+  }
+
+  async makeNewFolder(folderName: string, userId: number): Promise<Folder> {
+    const newFolder = await prisma.folder.create({
+      data: { fileName: folderName, userId: userId },
+    });
+    return newFolder;
   }
 }
 
