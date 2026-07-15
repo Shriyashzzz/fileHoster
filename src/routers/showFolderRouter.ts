@@ -11,7 +11,7 @@ showFolderRouter.get("/", async (req: Request, res: Response) => {
       if (!(await queries.checkIfFolderExists(intFolderId))) {
         res.status(404).send("Error: Folder Not Found  ");
       }
-      if (!(await queries.checkIfOwner(intFolderId, req.user.id))) {
+      if (!(await queries.checkIfFolderOwner(intFolderId, req.user.id))) {
         res.status(403).send("Error: You do not have access to this File ");
       }
       res.render("home.ejs", {

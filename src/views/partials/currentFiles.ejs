@@ -1,7 +1,7 @@
 
 <% if (locals.files.length != 0) { %>
     <% files.map((file) => { %>
-        <div><%= file.fileName%></div>
+        <a href="<%=`/getDetails/${file.id}`%>" ><%= file.fileName%></a>
     <% }) %>
     
 <% }else{ %>

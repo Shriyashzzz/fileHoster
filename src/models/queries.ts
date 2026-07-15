@@ -1,11 +1,14 @@
 import prisma from "../controllers/config/prisma";
-import type { Folder } from "../generated/prisma/client";
+import type { Folder, IndvFile } from "../generated/prisma/client";
 
-interface newFolder {
+interface retFolder {
   status: boolean;
   newFolder?: Folder;
 }
-
+interface retFile {
+  status: boolean;
+  file?: IndvFile;
+}
 class Queries {
   async getFolders(userId: number) {
     const folders = await prisma.folder.findMany({ where: { userId: userId } });
@@ -37,7 +40,7 @@ class Queries {
     return false;
   }
 
-  async makeNewFolder(folderName: string, userId: number): Promise<newFolder> {
+  async makeNewFolder(folderName: string, userId: number): Promise<retFolder> {
     try {
       const newFolder = await prisma.folder.create({
         data: { fileName: folderName, userId: userId },
@@ -63,10 +66,23 @@ class Queries {
     }
   }
 
-  async checkIfOwner(folderId: number, userId: number): Promise<Boolean> {
+  async checkIfFolderOwner(folderId: number, userId: number): Promise<Boolean> {
     try {
       const folder = await prisma.folder.findUnique({
         where: { id: folderId, userId: userId },
+      });
+      if (folder) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+  async checkIfFileOwner(fileId: number, userId: number): Promise<Boolean> {
+    try {
+      const folder = await prisma.indvFile.findUnique({
+        where: { id: fileId, userId: userId },
       });
       if (folder) {
         return true;
@@ -101,6 +117,18 @@ class Queries {
       }
     } catch (e) {
       return false;
+    }
+  }
+  async getThatFile(fileId: number): Promise<retFile> {
+    try {
+      const file = await prisma.indvFile.findUnique({ where: { id: fileId } });
+      if (file) {
+        return { status: true, file: file };
+      } else {
+        return { status: false };
+      }
+    } catch (e) {
+      return { status: false };
     }
   }
 }
