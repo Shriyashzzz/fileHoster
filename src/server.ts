@@ -18,6 +18,7 @@ import showFolderRouter from "./routers/folderRouter/showFolderRouter";
 import flash from "connect-flash";
 import fileDetailsRouter from "./routers/fileRouters/getFIleDetails";
 import renameFileRouter from "./routers/fileRouters/renameFileRouter";
+import deleteFileRouter from "./routers/fileRouters/deleteFileRouter";
 export const app = express();
 // express session config
 app.use(
@@ -65,6 +66,7 @@ app.use("/deleteFolder/:folderId", deleteFolderRouter);
 app.use("/getDetails/:fileId", fileDetailsRouter);
 app.get("/logout", handleLogOut);
 app.use("/renameFile/:fileId", renameFileRouter);
+app.use("/deleteFile/:fileId", deleteFileRouter);
 // Error Handler for server errors
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err);

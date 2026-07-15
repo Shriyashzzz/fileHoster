@@ -149,6 +149,20 @@ class Queries {
       return false;
     }
   }
+
+  async deleteFile(fileId: number): Promise<Boolean> {
+    try {
+      const file = await prisma.indvFile.delete({
+        where: { id: fileId },
+      });
+      if (file) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }
 
 const queries = new Queries();
