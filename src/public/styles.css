@@ -380,7 +380,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
-
+/* -------------- header component -------------------- */
 .header {
   display: flex;
   justify-content: space-between;
@@ -415,14 +415,10 @@ main {
   display: flex;
   height: 100%;
   padding: 2rem;
+  padding-left: 0;
 }
 
-#uploadForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+/*------------------ Left side box that shows the folders -------------------------*/
 .foldersBox {
   display: flex;
   flex-direction: column;
@@ -528,57 +524,39 @@ main {
 #uploadForm {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 1rem;
   background-color: inherit;
-  border: 1px solid var(--text-color);
-
+  border-bottom: 1px solid var(--text-color);
   font-family: "pixel";
   font-size: var(--font-small);
+  box-sizing: border-box;
 }
 
 #givenFile {
-  color: var(--text-color);
-  font-size: var(--font-small);
+  display: none;
 }
-
-#givenFile::file-selector-button {
-  padding: 0.4rem 0.8rem;
-  margin-right: 0.75rem;
-  border: 1px solid var(--text-color);
-  background-color: inherit;
-  color: var(--text-color);
-  font-family: "pixel";
-  font-size: var(--font-small);
+.uploadFileBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  height: 40px;
   cursor: pointer;
-  transition: 0.2s ease;
-}
-
-#givenFile::file-selector-button:hover {
-  background-color: var(--text-color);
-  color: var(--bg-color);
-}
-
-.uploadButton {
-  padding: 0.4rem 1rem;
   border: 1px solid var(--text-color);
-  background-color: inherit;
-  color: var(--text-color);
-  font-family: "pixel";
-  font-size: var(--font-small);
-  cursor: pointer;
-  transition: 0.2s ease;
-}
+  padding: 0 5px;
+  transition: 0.3s all ease;
 
-.uploadButton:hover {
-  background-color: var(--text-color);
-  color: var(--bg-color);
+  &&:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--bg-color);
+  }
+  &&:active {
+    transform: translate(0, -2px);
+  }
 }
-
-.uploadButton:active {
-  transform: scale(0.97);
-}
-
 /* ****************** */
 
 /* ---------------------- Current Files ------------------------ */
@@ -621,5 +599,11 @@ main {
     background-color: inherit;
     border: none;
     color: inherit;
+  }
+}
+
+@media screen and (max-width: 587px) {
+  .foldersBox {
+    padding-left: 0;
   }
 }
