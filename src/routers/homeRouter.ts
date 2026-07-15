@@ -7,7 +7,7 @@ const homeRouter = Router();
 homeRouter.get("/", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     if (!res.locals.universalId) {
-      const universalId = await queries.getUniversalId();
+      const universalId = await queries.getUniversalId(req.user.id);
       if (!universalId) {
         const newUniId = await createUniversalFolder(req);
         if (!newUniId) console.log("failed making new universal folder ");

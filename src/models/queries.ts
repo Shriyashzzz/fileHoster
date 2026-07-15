@@ -12,10 +12,6 @@ class Queries {
     return folders;
   }
 
-  async getAllFiles() {
-    const files = await prisma.indvFile.findMany();
-    return files;
-  }
   async getFolderFiles(folderId: number, userId: number) {
     const files = await prisma.indvFile.findMany({
       where: { folderId: folderId, userId: userId },
@@ -23,8 +19,10 @@ class Queries {
 
     return files;
   }
-  async getUniversalId() {
-    const firstId = await prisma.folder.findFirst();
+  async getUniversalId(userId: number) {
+    const firstId = await prisma.folder.findFirst({
+      where: { userId: userId },
+    });
     return firstId?.id;
   }
   async checkIfFolderExists(folderId: number): Promise<Boolean> {

@@ -7,7 +7,7 @@ const createUniversalFolder = async (
   if (req.user) {
     const uniFolder = await prisma.folder.create({
       data: {
-        fileName: "Universal",
+        fileName: "Root",
         userId: req.user.id,
       },
     });
