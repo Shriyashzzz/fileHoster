@@ -13,8 +13,8 @@ deleteFileRouter.get("/", async (req: Request, res: Response) => {
       );
       if (isValidOwner) {
         const success = await queries.deleteFile(intFileId);
-        if (success) {
-          return res.redirect("/");
+        if (success.status) {
+          return res.redirect(`/showFolder/${success.file!.folderId}`);
         }
       } else {
         return res.send("Error: You are unauthorized to perform this action!");

@@ -150,17 +150,17 @@ class Queries {
     }
   }
 
-  async deleteFile(fileId: number): Promise<Boolean> {
+  async deleteFile(fileId: number): Promise<retFile> {
     try {
       const file = await prisma.indvFile.delete({
         where: { id: fileId },
       });
       if (file) {
-        return true;
+        return { status: true, file: file };
       }
-      return false;
+      return { status: false };
     } catch (e) {
-      return false;
+      return { status: false };
     }
   }
 }

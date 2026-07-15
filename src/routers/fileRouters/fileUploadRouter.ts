@@ -37,7 +37,9 @@ fileUploadRouter.post(
         });
         if (indvFile) {
           res.locals.universalId = id;
-          return res.status(200).json({ redirectUrl: "/" });
+          return res
+            .status(200)
+            .json({ redirectUrl: `/showFolder/${folderId}` });
         }
       } catch (e) {
         console.log(e);
