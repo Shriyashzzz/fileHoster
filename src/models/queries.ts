@@ -76,6 +76,33 @@ class Queries {
       return false;
     }
   }
+
+  async emailExists(email: string): Promise<Boolean> {
+    try {
+      const user = await prisma.users.findUnique({ where: { email: email } });
+      if (user) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+  async usernameExists(username: string): Promise<Boolean> {
+    try {
+      const user = await prisma.users.findUnique({
+        where: { username: username },
+      });
+      if (user) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }
 
 const queries = new Queries();

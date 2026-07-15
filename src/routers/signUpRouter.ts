@@ -4,7 +4,7 @@ import type { Request, Response } from "express";
 import { validationResult, matchedData, body } from "express-validator";
 import prisma from "../controllers/config/prisma";
 const signUpRouter = Router();
-
+import queries from "../models/queries";
 signUpRouter.get("/", (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.redirect("/");
@@ -20,10 +20,24 @@ const validationMiddleware = [
     .notEmpty()
     .withMessage(` Username ${emptyError}`)
     .isLength({ min: 5 })
-    .withMessage("Username has to be atleast 5 charachthers long "),
+    .withMessage("Username has to be atleast 5 charachthers long ")
+    .custom(async (rawUsername) => {
+      const userExists = await queries.usernameExists(rawUsername);
+      if (userExists) {
+        throw new Error("Username is already Taken. Try something else!");
+      }
+      return true;
+    }),
   body("email")
     .isEmail()
-    .withMessage("Make sure the email is valid. EX: xyz@email.com"),
+    .withMessage("Make sure the email is valid. EX: xyz@email.com")
+    .custom(async (rawEmail) => {
+      const userExists = await queries.emailExists(rawEmail);
+      if (userExists) {
+        throw new Error("Email is already registered.");
+      }
+      return true;
+    }),
   body("password").notEmpty().withMessage(`Password field ${emptyError}`),
   body("cpassword")
     .notEmpty()
@@ -55,7 +69,8 @@ signUpRouter.post(
       });
       res.redirect("/login");
     } else {
-      res.render("/signup.ejs", { errors: errors.array() });
+      console.log(errors);
+      res.render("signup.ejs", { errors: errors.array() });
     }
   },
 );
