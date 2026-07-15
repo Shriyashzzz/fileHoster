@@ -434,47 +434,58 @@ main {
     width: 100%;
     display: flex;
     flex-direction: column;
-    .folder {
+    .folderName {
       display: flex;
-      margin-left: 2rem;
-      justify-content: space-between;
-      height: fit-content;
-      cursor: pointer;
-      .deleteFolderBtn {
-        background-color: inherit;
-        border: none;
-        cursor: pointer;
-        color: wheat;
-      }
-      .folderName {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-      }
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
     }
   }
-  .newFolderContainer {
-    width: 100%;
+}
+.newFolderContainer {
+  width: 100%;
 
-    .fileButton {
-      width: 100%;
-      height: fit-content;
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 1rem;
-      background-color: inherit;
-      color: var(--text-color);
-      border: 1px solid var(--text-color);
-      gap: 1rem;
-      align-items: center;
-      cursor: pointer;
-    }
+  .fileButton {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1rem;
+    background-color: inherit;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.folder {
+  display: flex;
+  margin-left: 2rem;
+  flex: 1;
+  justify-content: space-between;
+  height: fit-content;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 0.2s ease;
+}
+.folderBtnBox {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .deleteFolderBtn {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    color: wheat;
+    transition: 0.3s transform ease-out;
   }
 }
 
 .folder:hover {
-  border-bottom: 1px solid var(--text-color);
+  border-bottom-color: var(--text-color);
 }
 
 .filesBox {
@@ -494,4 +505,8 @@ main {
 
 .selectedFolder {
   border-bottom: 1px solid var(--text-color);
+}
+
+.deleteFolderBtn:hover {
+  transform: scale(1.2);
 }

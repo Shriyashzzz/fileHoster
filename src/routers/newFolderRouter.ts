@@ -14,12 +14,12 @@ newFolderRouter.post(
       const query = await queries.makeNewFolder(folderName, userId);
       if (query.status == true && query.newFolder) {
         res.locals.universalId = query.newFolder.id;
-        res.json({ status: 200, redirectUrl: "/" });
+        return res.json({ status: 200, redirectUrl: "/" });
       } else {
-        res.json({ status: 500, message: "Internal Server Error" });
+        return res.json({ status: 500, message: "Internal Server Error" });
       }
     } else {
-      res.status(401).redirect("/login");
+      return res.status(401).redirect("/login");
     }
   },
 );

@@ -6,9 +6,9 @@ const loginRouter = Router();
 
 loginRouter.get("/", (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    res.redirect("/");
+    return res.redirect("/");
   } else {
-    res.render("login.ejs");
+    return res.render("login.ejs");
   }
 });
 
