@@ -396,6 +396,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
 
     h2 {
       margin: 0;
@@ -444,7 +445,7 @@ main {
 }
 .newFolderContainer {
   width: 100%;
-
+  transition: 0.5s ease;
   .fileButton {
     width: 100%;
     height: fit-content;
@@ -460,6 +461,16 @@ main {
   }
 }
 
+.newFolderContainer:hover {
+  background-color: var(--text-color);
+
+  .fileButton {
+    color: var(--bg-color);
+  }
+}
+.newFolderContainer:active {
+  transform: translate(3px, 0);
+}
 .folder {
   display: flex;
   margin-left: 2rem;
@@ -479,7 +490,7 @@ main {
     background-color: inherit;
     border: none;
     cursor: pointer;
-    color: wheat;
+    color: white;
     transition: 0.3s transform ease-out;
   }
 }
@@ -510,3 +521,61 @@ main {
 .deleteFolderBtn:hover {
   transform: scale(1.2);
 }
+
+/******************** file upload form ********************** */
+
+#uploadForm {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: inherit;
+  border: 1px solid var(--text-color);
+
+  font-family: "pixel";
+  font-size: var(--font-small);
+}
+
+#givenFile {
+  color: var(--text-color);
+  font-size: var(--font-small);
+}
+
+#givenFile::file-selector-button {
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.75rem;
+  border: 1px solid var(--text-color);
+  background-color: inherit;
+  color: var(--text-color);
+  font-family: "pixel";
+  font-size: var(--font-small);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#givenFile::file-selector-button:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+.uploadButton {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--text-color);
+  background-color: inherit;
+  color: var(--text-color);
+  font-family: "pixel";
+  font-size: var(--font-small);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.uploadButton:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+.uploadButton:active {
+  transform: scale(0.97);
+}
+
+/* ****************** */
