@@ -18,5 +18,9 @@
       method: "POST",
       body: formData,
     });
+    const data = await response.json();
+    if (data.redirectUrl) {
+      window.location.href = data.redirectUrl;
+    }
   });
 </script>
