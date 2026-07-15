@@ -6,22 +6,21 @@ const homeRouter = Router();
 
 homeRouter.get("/", async (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
-    const universalId = await queries.getUniversalId();
-    if (!universalId) {
-      const newUniId = await createUniversalFolder(req);
-      if (!newUniId) console.log("failed making new universal folder ");
-      res.status(200).render("home.ejs", {
-        folders: await queries.getFolders(),
-        files: await queries.getFolderFiles(newUniId!),
-        universalId: newUniId,
-      });
-    } else {
-      res.status(200).render("home.ejs", {
-        folders: await queries.getFolders(),
-        files: await queries.getFolderFiles(universalId),
-        universalId: universalId,
-      });
+    if (!res.locals.universalId) {
+      const universalId = await queries.getUniversalId();
+      if (!universalId) {
+        const newUniId = await createUniversalFolder(req);
+        if (!newUniId) console.log("failed making new universal folder ");
+        res.locals.universalId = newUniId;
+      } else {
+        res.locals.universalId = universalId;
+      }
     }
+    res.status(200).render("home.ejs", {
+      folders: await queries.getFolders(),
+      files: await queries.getFolderFiles(res.locals.universalId),
+      universalId: res.locals.universalId,
+    });
   } else {
     res.redirect("/login");
   }

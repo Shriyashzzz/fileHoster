@@ -13,7 +13,7 @@
     X
   </button>
 
-  <form action="/newFolder" method="post">
+  <form id="newFolderForm">
     <legend>Add a new folder</legend>
     <label for="folderNameInput">Folder Name: </label>
     <input
@@ -23,6 +23,29 @@
       required
       minlength="1"
     />
-    <button type="submit">Make a new Folder</button>
+    <button class="newFolderFileBtn" type="submit">Make a new Folder</button>
   </form>
+  <% if (locals.newFolderErrorMessage) { %>
+        <%= newFolderErrorMessage %>
+  <% } %>   
 </dialog>
+
+<script>
+  const newFolderFileBtn = document.querySelector(".newFolderFileBtn");
+  const newFolderForm = document.querySelector("#newFolderForm");
+  newFolderFileBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const form = new FormData(newFolderForm);
+
+    const response = await fetch("/newFolder", {
+      method: "POST",
+      body: form,
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if (data.status == 200 && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      }
+    }
+  });
+</script>

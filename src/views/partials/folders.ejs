@@ -4,9 +4,12 @@
 <div class = "folders">
     <% if (locals.folders) { %>
         <% folders.map((folder)=>{%>
-            <div class ="folder" data-folderid = <%= folder.id %>> 
-                <h4><%= folder.fileName %></h4>
-            </div>
+            <div>
+                <div class ="folder" data-folderid = <%= folder.id %>> 
+                    <h4><%= folder.fileName %></h4>
+                </div>
+                <button class = "deleteFolderBtn" data-folderid= <%= folder.id %>>Delete</button>
+             </div>
         <%  }) %>
     
     <% } %>
@@ -14,15 +17,35 @@
 
 <script>
     const folders = document.querySelectorAll(".folder")
+    const deleteBtns = document.querySelectorAll(".deleteFolderBtn")
     folders.forEach((folder) =>{
         folder.addEventListener("click", (async()=>{
             currentFolderId = folder.dataset.folderid;
             console.log(currentFolderId)
             const folderId = folder.dataset.folderid;
             const response = await fetch(`/getFiles/${folderId}`, {
-                method: "GET"
+                method: "GET",
+                headers: { 'Content-Type': 'application/json' }
             })
-                
+            const data = await response.json()
+            if(data.redirectUrl){
+                window.location.href = data.redirectUrl
+            }
             }))
+    })
+
+
+    deleteBtns.forEach((btn) =>{
+        btn.addEventListener("click", async()=>{
+            const btnFolderId = btn.dataset.folderid;
+            const response = await fetch(`/deleteFolder/${btnFolderId}`, {
+                method: "DELETE"
+            })
+            const data = await response.json()
+            console.log(data)
+            if(data.status == 200 && data.redirectUrl){
+                window.location.href = data.redirectUrl
+            }
+        })
     })
 </script>

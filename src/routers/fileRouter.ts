@@ -15,10 +15,12 @@ fileRouter.get(
     const intFolderId = parseInt(folderId);
     if (await queries.checkIfFolderExists(intFolderId)) {
       const files = await queries.getFolderFiles(parseInt(folderId));
-      res.render("home.ejs", {
-        folders: await queries.getFolders(),
-        files: await queries.getFolderFiles(intFolderId),
-        universalId: intFolderId, // send the currentid to be default back on rerender
+
+      res.locals.universalId = intFolderId;
+      console.log("at filerouter", res.locals.universalId);
+      res.json({
+        status: 200,
+        redirectUrl: `/showFolder/${res.locals.universalId}`,
       });
     } else {
       res.sendStatus(400);

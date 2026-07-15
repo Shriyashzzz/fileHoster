@@ -1,5 +1,11 @@
 import prisma from "../controllers/config/prisma";
 import type { Folder } from "../generated/prisma/client";
+
+interface newFolder {
+  status: boolean;
+  newFolder?: Folder;
+}
+
 class Queries {
   async getFolders() {
     const folders = await prisma.folder.findMany();
@@ -33,11 +39,30 @@ class Queries {
     return false;
   }
 
-  async makeNewFolder(folderName: string, userId: number): Promise<Folder> {
-    const newFolder = await prisma.folder.create({
-      data: { fileName: folderName, userId: userId },
-    });
-    return newFolder;
+  async makeNewFolder(folderName: string, userId: number): Promise<newFolder> {
+    try {
+      const newFolder = await prisma.folder.create({
+        data: { fileName: folderName, userId: userId },
+      });
+      return { status: true, newFolder: newFolder };
+    } catch (e) {
+      return {
+        status: false,
+      };
+    }
+  }
+
+  async deleteFolder(folderId: number): Promise<Boolean> {
+    try {
+      const delComm = await prisma.folder.delete({
+        where: {
+          id: folderId,
+        },
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
 

@@ -1,11 +1,16 @@
 import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import multer from "multer";
-export const upload = multer({ dest: "uploads/" });
 import prisma from "../controllers/config/prisma";
 import authCheckerMiddleware from "../middlewares/checkIfAuth";
 import queries from "../models/queries";
+
+// what is an multer ?
+// => node.js middleware for handling multipart/form-data
+// text goes to req.body and multipart goed to either req.file || re.files depending if it's one upload or multiple uploads
+export const upload = multer({ dest: "uploads/" });
 const fileUploadRouter = Router({ mergeParams: true });
+
 fileUploadRouter.post(
   "/",
   authCheckerMiddleware,
@@ -31,11 +36,8 @@ fileUploadRouter.post(
           },
         });
         if (indvFile) {
-          res.status(200).render("home.ejs", {
-            folders: await queries.getFolders(),
-            files: await queries.getFolderFiles(id),
-            universalId: id, // currentFolder Id
-          });
+          res.locals.universalId = id;
+          res.status(200).redirect("/");
         }
       } catch (e) {
         console.log(e);
