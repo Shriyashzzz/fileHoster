@@ -7,8 +7,8 @@ interface newFolder {
 }
 
 class Queries {
-  async getFolders() {
-    const folders = await prisma.folder.findMany();
+  async getFolders(userId: number) {
+    const folders = await prisma.folder.findMany({ where: { userId: userId } });
     return folders;
   }
 
@@ -16,9 +16,9 @@ class Queries {
     const files = await prisma.indvFile.findMany();
     return files;
   }
-  async getFolderFiles(folderId: number) {
+  async getFolderFiles(folderId: number, userId: number) {
     const files = await prisma.indvFile.findMany({
-      where: { folderId: folderId },
+      where: { folderId: folderId, userId: userId },
     });
 
     return files;

@@ -17,8 +17,8 @@ homeRouter.get("/", async (req: Request, res: Response) => {
       }
     }
     res.status(200).render("home.ejs", {
-      folders: await queries.getFolders(),
-      files: await queries.getFolderFiles(res.locals.universalId),
+      folders: await queries.getFolders(req.user.id),
+      files: await queries.getFolderFiles(res.locals.universalId, req.user.id),
       universalId: res.locals.universalId,
     });
   } else {
