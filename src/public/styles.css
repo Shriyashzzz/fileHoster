@@ -351,7 +351,7 @@ template {
 }
 
 @font-face {
-  font-family: "bowlby";
+  font-family: "bowl";
   src:
     url("./fonts/bowlbyone-regular-webfont.woff2") format("woff2"),
     url("./fonts/bowlbyone-regular-webfont.woff") format("woff");
@@ -414,8 +414,9 @@ body {
 main {
   display: flex;
   height: 100%;
-  padding: 2rem;
-  padding-left: 0;
+  margin-top: 1rem;
+  margin-left: 0;
+  border-top: 1px solid var(--text-color);
 }
 
 /*------------------ Left side box that shows the folders -------------------------*/
@@ -495,22 +496,6 @@ main {
   border-bottom-color: var(--text-color);
 }
 
-.filesBox {
-  display: flex;
-  flex-direction: column;
-  flex: 0.7;
-  width: 100%;
-  padding-left: 1rem;
-  gap: 1rem;
-}
-
-.emptyBox {
-  display: flex;
-  justify-content: center;
-  margin-top: 20rem;
-  height: 100%;
-}
-
 .selectedFolder {
   border-bottom: 1px solid var(--text-color);
 }
@@ -528,7 +513,7 @@ main {
   gap: 1rem;
   padding: 1rem;
   background-color: inherit;
-  border-bottom: 1px solid var(--text-color);
+
   font-family: "pixel";
   font-size: var(--font-small);
   box-sizing: border-box;
@@ -560,6 +545,14 @@ main {
 /* ****************** */
 
 /* ---------------------- Current Files ------------------------ */
+.filesBox {
+  display: flex;
+  flex-direction: column;
+  flex: 0.7;
+  width: 100%;
+  padding: 1rem;
+  gap: 1rem;
+}
 
 .fileContainer {
   display: flex;
@@ -601,9 +594,27 @@ main {
     color: inherit;
   }
 }
+/* if no files in the container*/
+
+.emptyFileBox {
+  display: flex;
+  height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rem;
+  h3 {
+    font-size: var(--font-large);
+    color: rgb(0, 0, 255);
+    font-family: "pixel";
+  }
+  p {
+    font-size: calc(var(--font-small) - 4px);
+  }
+}
 
 @media screen and (max-width: 587px) {
   .foldersBox {
-    padding-left: 0;
+    padding-left: 2px;
   }
 }
