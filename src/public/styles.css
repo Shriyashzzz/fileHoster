@@ -569,6 +569,13 @@ main {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    a {
+      letter-spacing: 1px;
+      width: 300px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .fileEditContainer {
@@ -594,8 +601,8 @@ main {
     color: inherit;
   }
 }
-/* if no files in the container*/
-
+/*--------File container----------*/
+/* IF EMPTY */
 .emptyFileBox {
   display: flex;
   height: 100dvh;
@@ -613,8 +620,186 @@ main {
   }
 }
 
+/* --------------------------------------------------- */
+
+/* ---------------------- New Folder Dialog ------------------------ */
+#newFolderDialog {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  font-family: "pixel";
+  font-size: var(--font-small);
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#newFolderDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#newFolderDialog > .fileButton {
+  cursor: pointer;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  justify-content: center;
+}
+
+#newFolderForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+#newFolderForm legend {
+  font-size: var(--font-large);
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+#newFolderForm label {
+  font-size: var(--font-small);
+}
+
+#newFolderForm input[type="text"] {
+  background-color: inherit;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  font-family: "pixel";
+  font-size: var(--font-small);
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  margin-top: 0.4rem;
+}
+
+#newFolderForm input[type="text"]:focus {
+  border-color: rgb(0, 0, 255);
+}
+
+.newFolderFileBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+  border: 1px solid var(--text-color);
+  background-color: inherit;
+  color: var(--text-color);
+  font-family: "pixel";
+  font-size: var(--font-small);
+  transition: 0.3s all ease;
+}
+
+.newFolderFileBtn:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+.newFolderFileBtn:active {
+  transform: translate(0, -2px);
+}
+
+/* ---------------------- Rename File Dialog ------------------------ */
+#renameDialog {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  font-family: "pixel";
+  font-size: var(--font-small);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#renameDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#renameDialog > .fileButton {
+  cursor: pointer;
+  position: absolute;
+  z-index: 2;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  justify-content: center;
+}
+
+#renameDialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+#renameDialog legend {
+  font-size: var(--font-large);
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+#renameDialog label {
+  font-size: var(--font-small);
+}
+
+#renameDialog input[type="text"] {
+  background-color: inherit;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  font-family: "pixel";
+  font-size: var(--font-small);
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  margin-top: 0.4rem;
+}
+
+#renameDialog input[type="text"]:focus {
+  border-color: rgb(0, 0, 255);
+}
+
+@media screen and (max-width: 587px) {
+  #renameDialog {
+    width: 92%;
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 587px) {
+  #newFolderDialog {
+    width: 92%;
+    padding: 1rem;
+  }
+}
+
 @media screen and (max-width: 587px) {
   .foldersBox {
     padding-left: 2px;
+  }
+  .fileContainer {
+    justify-content: flex-start;
+    .fileLogo {
+      a {
+        letter-spacing: 0.2px;
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   }
 }
