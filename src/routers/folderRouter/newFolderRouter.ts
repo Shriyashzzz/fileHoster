@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
-import queries from "../models/queries";
-import { upload } from "./fileUploadRouter";
+import queries from "../../models/queries";
+import { upload } from "../fileRouters/fileUploadRouter";
 const newFolderRouter = Router({ mergeParams: true });
 
 newFolderRouter.post(

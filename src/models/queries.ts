@@ -135,6 +135,20 @@ class Queries {
       return { status: false };
     }
   }
+  async renameFile(fileId: number, newName: string): Promise<Boolean> {
+    try {
+      const file = await prisma.indvFile.update({
+        where: { id: fileId },
+        data: { fileName: newName },
+      });
+      if (file) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }
 
 const queries = new Queries();

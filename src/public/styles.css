@@ -505,6 +505,7 @@ main {
   flex: 0.7;
   width: 100%;
   padding-left: 1rem;
+  gap: 1rem;
 }
 
 .emptyBox {
@@ -579,3 +580,46 @@ main {
 }
 
 /* ****************** */
+
+/* ---------------------- Current Files ------------------------ */
+
+.fileContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+  }
+  .fileLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .fileEditContainer {
+    display: flex;
+    gap: 1rem;
+
+    a,
+    .fileButton {
+      transition: 0.3s transform ease;
+      &:hover {
+        transform: scale(1.2);
+      }
+      &:active {
+        color: black;
+      }
+    }
+  }
+  .fileButton {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: inherit;
+    border: none;
+    color: inherit;
+  }
+}

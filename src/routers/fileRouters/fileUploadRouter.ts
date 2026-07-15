@@ -1,9 +1,9 @@
 import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import multer from "multer";
-import prisma from "../controllers/config/prisma";
-import authCheckerMiddleware from "../middlewares/checkIfAuth";
-import queries from "../models/queries";
+import prisma from "../../controllers/config/prisma";
+import authCheckerMiddleware from "../../middlewares/checkIfAuth";
+import queries from "../../models/queries";
 
 // what is an multer ?
 // => node.js middleware for handling multipart/form-data

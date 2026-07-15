@@ -8,15 +8,16 @@ import { homeRouter } from "./routers/homeRouter";
 import { deserializer, handleLogOut, localStrat, serializer } from "./auth";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import prisma from "./controllers/config/prisma";
-import loginRouter from "./routers/loginRouter";
-import signUpRouter from "./routers/signUpRouter";
-import fileUploadRouter from "./routers/fileUploadRouter";
-import fileRouter from "./routers/fileRouter";
-import newFolderRouter from "./routers/newFolderRouter";
-import deleteFolderRouter from "./routers/deleteFolderRouter";
-import showFolderRouter from "./routers/showFolderRouter";
+import loginRouter from "./routers/authRouters/loginRouter";
+import signUpRouter from "./routers/authRouters/signUpRouter";
+import fileUploadRouter from "./routers/fileRouters/fileUploadRouter";
+import fileRouter from "./routers/folderRouter/fileRouter";
+import newFolderRouter from "./routers/folderRouter/newFolderRouter";
+import deleteFolderRouter from "./routers/folderRouter/deleteFolderRouter";
+import showFolderRouter from "./routers/folderRouter/showFolderRouter";
 import flash from "connect-flash";
-import fileDetailsRouter from "./routers/getFIleDetails";
+import fileDetailsRouter from "./routers/fileRouters/getFIleDetails";
+import renameFileRouter from "./routers/fileRouters/renameFileRouter";
 export const app = express();
 // express session config
 app.use(
@@ -63,6 +64,7 @@ app.use("/newFolder", newFolderRouter);
 app.use("/deleteFolder/:folderId", deleteFolderRouter);
 app.use("/getDetails/:fileId", fileDetailsRouter);
 app.get("/logout", handleLogOut);
+app.use("/renameFile/:fileId", renameFileRouter);
 // Error Handler for server errors
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err);

@@ -1,5 +1,5 @@
 import { Router, type Request, type Response } from "express";
-import queries from "../models/queries";
+import queries from "../../models/queries";
 
 const showFolderRouter = Router({ mergeParams: true });
 

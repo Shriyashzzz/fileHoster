@@ -1,6 +1,6 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import prisma from "../controllers/config/prisma";
+import prisma from "../../controllers/config/prisma";
 import passport from "passport";
 const loginRouter = Router();
 
