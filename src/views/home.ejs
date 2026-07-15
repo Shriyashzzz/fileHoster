@@ -26,5 +26,8 @@
 
 <script>
   let currentFolderId = "<%= universalId %>";
-  console.log("uni id : ", currentFolderId);
+  const selectFolderElement = document.querySelector(
+    `[data-folderid="${currentFolderId}"]`,
+  );
+  selectFolderElement.classList.add("selectedFolder");
 </script>
