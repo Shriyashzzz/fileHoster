@@ -19,9 +19,7 @@ fileRouter.get(
           parseInt(folderId),
           req.user.id,
         );
-
         res.locals.universalId = intFolderId;
-        console.log("at filerouter", res.locals.universalId);
         res.json({
           status: 200,
           redirectUrl: `/showFolder/${res.locals.universalId}`,

@@ -29,15 +29,19 @@ class Queries {
     return firstId?.id;
   }
   async checkIfFolderExists(folderId: number): Promise<Boolean> {
-    const folder = await prisma.folder.findUnique({
-      where: {
-        id: folderId,
-      },
-    });
-    if (folder) {
-      return true;
+    try {
+      const folder = await prisma.folder.findUnique({
+        where: {
+          id: folderId,
+        },
+      });
+      if (folder) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
     }
-    return false;
   }
 
   async makeNewFolder(folderName: string, userId: number): Promise<retFolder> {

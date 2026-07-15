@@ -1,14 +1,14 @@
 
 
 
-<div class = "folders">
+<div class = "foldersContainer">
     <% if (locals.folders) { %>
         <% folders.map((folder)=>{%>
-            <div>
-                <div class ="folder" data-folderid = <%= folder.id %>> 
-                    <h4><%= folder.fileName %></h4>
+                <div class="folder">
+                    <div class = "folderName"  data-folderid=<%= folder.id %>> 
+                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-icon lucide-folder"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> <h4><%= folder.fileName %></h4>
                 </div>
-                <button class = "deleteFolderBtn" data-folderid= <%= folder.id %>>Delete</button>
+                <button data-buttonfolderid =<%=folder.id%> class = "deleteFolderBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
              </div>
         <%  }) %>
     
@@ -16,12 +16,14 @@
 </div>
 
 <script>
-    const folders = document.querySelectorAll(".folder")
+    const folders = document.querySelectorAll(".folderName")
     const deleteBtns = document.querySelectorAll(".deleteFolderBtn")
+
     folders.forEach((folder) =>{
         folder.addEventListener("click", (async()=>{
+            console.log("current folder id : ", currentFolderId)
             currentFolderId = folder.dataset.folderid;
-            console.log(currentFolderId)
+          
             const folderId = folder.dataset.folderid;
             const response = await fetch(`/getFiles/${folderId}`, {
                 method: "GET",
@@ -37,7 +39,8 @@
 
     deleteBtns.forEach((btn) =>{
         btn.addEventListener("click", async()=>{
-            const btnFolderId = btn.dataset.folderid;
+            const btnFolderId = btn.dataset.buttonfolderid;
+            console.log("button id ", btnFolderId)
             const response = await fetch(`/deleteFolder/${btnFolderId}`, {
                 method: "DELETE"
             })

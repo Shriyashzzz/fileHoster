@@ -4,21 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <%- include('./partials/header.ejs') %> welocme to home page <%-
-    include('./partials/uploadFiles.ejs') %>
+    <%- include('./partials/header.ejs') %>
+    <%-include('./partials/uploadFiles.ejs') %>
     <main>
-      <section>
+      <section class="foldersBox">
         <%-include('./partials/addFolderDialog.ejs') %>
         <%-include('./partials/folders.ejs') %>
       </section>
 
-      <section><%- include('./partials/currentFiles.ejs') %></section>
+      <section class="filesBox">
+        <%- include('./partials/currentFiles.ejs') %>
+      </section>
     </main>
   </body>
 </html>
 
 <script>
   let currentFolderId = "<%= universalId %>";
+  console.log("uni id : ", currentFolderId);
 </script>

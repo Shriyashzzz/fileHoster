@@ -9,19 +9,21 @@ showFolderRouter.get("/", async (req: Request, res: Response) => {
     if (typeof folderId == "string") {
       const intFolderId = parseInt(folderId);
       if (!(await queries.checkIfFolderExists(intFolderId))) {
-        res.status(404).send("Error: Folder Not Found  ");
+        return res.status(404).send("Error: Folder Not Found  ");
       }
       if (!(await queries.checkIfFolderOwner(intFolderId, req.user.id))) {
-        res.status(403).send("Error: You do not have access to this File ");
+        return res
+          .status(403)
+          .send("Error: You do not have access to this File ");
       }
-      res.render("home.ejs", {
+      return res.render("home.ejs", {
         folders: await queries.getFolders(req.user.id),
         files: await queries.getFolderFiles(intFolderId, req.user.id),
         universalId: folderId,
       });
     }
   } else {
-    res.redirect("/login");
+    return res.redirect("/login");
   }
 });
 

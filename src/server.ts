@@ -39,7 +39,7 @@ app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.set("views", path.join(import.meta.dirname, "views"));
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(path.join(import.meta.dirname, "public")));
 // passport stuff for authentication
 app.use(passport.initialize());
 app.use(passport.session());
