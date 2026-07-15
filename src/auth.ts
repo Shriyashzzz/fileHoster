@@ -2,6 +2,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
 import prisma from "./controllers/config/prisma";
 import type { Users } from "./generated/prisma/client";
+import type { NextFunction } from "express";
 
 const localStrat = new LocalStrategy(async (username, password, done) => {
   try {
@@ -43,4 +44,13 @@ const deserializer = async (
     return done(err);
   }
 };
-export { localStrat, serializer, deserializer };
+
+const handleLogOut = async (req: any, res: any, next: any) => {
+  req.logout((err: Error) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+};
+export { localStrat, serializer, deserializer, handleLogOut };

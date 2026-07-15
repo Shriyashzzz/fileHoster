@@ -8,10 +8,11 @@ showFolderRouter.get("/", async (req: Request, res: Response) => {
     const { folderId } = req.params;
     if (typeof folderId == "string") {
       const intFolderId = parseInt(folderId);
-      if ((await queries.checkIfFolderExists(intFolderId)) == false) {
-        res
-          .status(401)
-          .send("Error: Trying to access files that are not available  ");
+      if (!(await queries.checkIfFolderExists(intFolderId))) {
+        res.status(404).send("Error: Folder Not Found  ");
+      }
+      if (!(await queries.checkIfOwner(intFolderId, req.user.id))) {
+        res.status(403).send("Error: You do not have access to this File ");
       }
       res.render("home.ejs", {
         folders: await queries.getFolders(req.user.id),

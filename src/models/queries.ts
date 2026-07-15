@@ -64,6 +64,20 @@ class Queries {
       return false;
     }
   }
+
+  async checkIfOwner(folderId: number, userId: number): Promise<Boolean> {
+    try {
+      const folder = await prisma.folder.findUnique({
+        where: { id: folderId, userId: userId },
+      });
+      if (folder) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }
 
 const queries = new Queries();

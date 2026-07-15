@@ -5,7 +5,7 @@ import session from "express-session";
 import path from "node:path";
 import passport from "passport";
 import { homeRouter } from "./routers/homeRouter";
-import { deserializer, localStrat, serializer } from "./auth";
+import { deserializer, handleLogOut, localStrat, serializer } from "./auth";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import prisma from "./controllers/config/prisma";
 import loginRouter from "./routers/loginRouter";
@@ -53,6 +53,7 @@ app.use("/showFolder/:folderId", showFolderRouter);
 app.use("/getFiles/:folderId", fileRouter);
 app.use("/newFolder", newFolderRouter);
 app.use("/deleteFolder/:folderId", deleteFolderRouter);
+app.get("/logout", handleLogOut);
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
   res.send("Server Error: Please Try Again Later");
