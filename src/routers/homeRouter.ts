@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import queries from "../models/queries";
-import createUniversalFolder from "../utils/createUniversalFolder";
+import queries from "../models/queries.js";
+import createUniversalFolder from "../utils/createUniversalFolder.js";
 const homeRouter = Router();
 
 homeRouter.get("/", async (req: Request, res: Response) => {

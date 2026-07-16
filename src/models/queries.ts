@@ -1,5 +1,5 @@
-import prisma from "../controllers/config/prisma";
-import type { Folder, IndvFile } from "../generated/prisma/client";
+import prisma from "../controllers/config/prisma.js";
+import type { Folder, IndvFile } from "../generated/prisma/client.js";
 
 interface retFolder {
   status: boolean;

@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
-import queries from "../../models/queries";
-import { supabase } from "./fileUploadRouter";
+import queries from "../../models/queries.js";
+import { supabase } from "./fileUploadRouter.js";
 const downloadFileRouter = Router({ mergeParams: true });
 
 downloadFileRouter.get("/", async (req: Request, res: Response) => {

@@ -1,5 +1,5 @@
-import queries from "../models/queries";
-import prisma from "../controllers/config/prisma";
+import queries from "../models/queries.js";
+import prisma from "../controllers/config/prisma.js";
 import type { Request } from "express";
 const createUniversalFolder = async (
   req: Request,

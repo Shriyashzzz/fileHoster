@@ -1,6 +1,6 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
-import prisma from "./controllers/config/prisma";
+import prisma from "./controllers/config/prisma.js";
 import type { Users } from "./generated/prisma/client";
 import type { NextFunction } from "express";
 

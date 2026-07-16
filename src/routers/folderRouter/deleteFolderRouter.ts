@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
-import queries from "../../models/queries";
-import createUniversalFolder from "../../utils/createUniversalFolder";
+import queries from "../../models/queries.js";
+import createUniversalFolder from "../../utils/createUniversalFolder.js";
 const deleteFolderRouter = Router({ mergeParams: true });
 
 deleteFolderRouter.delete(

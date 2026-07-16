@@ -1,6 +1,6 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import queries from "../../models/queries";
+import queries from "../../models/queries.js";
 
 const fileRouter = Router({ mergeParams: true });
 

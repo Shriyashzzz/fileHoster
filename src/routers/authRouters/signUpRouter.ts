@@ -2,9 +2,9 @@ import bcrypt from "bcryptjs";
 import { Router } from "express";
 import type { Request, Response } from "express";
 import { validationResult, matchedData, body } from "express-validator";
-import prisma from "../../controllers/config/prisma";
+import prisma from "../../controllers/config/prisma.js";
 const signUpRouter = Router();
-import queries from "../../models/queries";
+import queries from "../../models/queries.js";
 signUpRouter.get("/", (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.redirect("/");

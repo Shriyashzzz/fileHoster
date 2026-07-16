@@ -5,9 +5,9 @@ import {
   type NextFunction,
 } from "express";
 import { validationResult, matchedData, body } from "express-validator";
-import authCheckerMiddleware from "../../middlewares/checkIfAuth";
-import { supabase } from "./fileUploadRouter";
-import queries from "../../models/queries";
+import authCheckerMiddleware from "../../middlewares/checkIfAuth.js";
+import { supabase } from "./fileUploadRouter.js";
+import queries from "../../models/queries.js";
 const shareLinkRouter = Router({ mergeParams: true });
 
 const validationMiddleware = [

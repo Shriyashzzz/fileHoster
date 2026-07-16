@@ -1,11 +1,11 @@
 import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import multer from "multer";
-import authCheckerMiddleware from "../../middlewares/checkIfAuth";
+import authCheckerMiddleware from "../../middlewares/checkIfAuth.js";
 import { createClient } from "@supabase/supabase-js";
-import config from "../../controllers/config/config";
-import getFileMetaData from "../../utils/getFileMetaData";
-import queries from "../../models/queries";
+import config from "../../controllers/config/config.js";
+import getFileMetaData from "../../utils/getFileMetaData.js";
+import queries from "../../models/queries.js";
 // what is an multer ?
 // => node.js middleware for handling multipart/form-data
 // text goes to req.body and multipart goed to either req.file || re.files depending if it's one upload or multiple uploads

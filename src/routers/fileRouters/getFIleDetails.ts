@@ -1,5 +1,5 @@
 import { Router, type Response, type Request } from "express";
-import queries from "../../models/queries";
+import queries from "../../models/queries.js";
 
 const fileDetailsRouter = Router({ mergeParams: true });
 

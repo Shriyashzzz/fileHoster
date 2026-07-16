@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
-import queries from "../../models/queries";
-import { upload } from "../fileRouters/fileUploadRouter";
+import queries from "../../models/queries.js";
+import { upload } from "../fileRouters/fileUploadRouter.js";
 import { body, validationResult, matchedData } from "express-validator";
 
 const validationMiddleware = [
