@@ -35,8 +35,8 @@
   const newFolderForm = document.querySelector("#newFolderForm");
   newFolderFileBtn.addEventListener("click", async (e) => {
     e.preventDefault();
-    const form = new FormData(newFolderForm);
 
+    const form = new FormData(newFolderForm);
     const response = await fetch("/newFolder", {
       method: "POST",
       body: form,

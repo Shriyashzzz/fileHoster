@@ -4,22 +4,20 @@ import { upload } from "../fileRouters/fileUploadRouter.js";
 import { body, validationResult, matchedData } from "express-validator";
 
 const validationMiddleware = [
-  body("folderName")
-    .trim()
-    .notEmpty()
-    .withMessage("Folder Name cannot be empty"),
+  body("folderName").notEmpty().withMessage("Folder Name cannot be empty"),
 ];
 
 const newFolderRouter = Router({ mergeParams: true });
 
 newFolderRouter.post(
   "/",
-  validationMiddleware,
   upload.none(),
+  validationMiddleware,
   async (req: Request, res: Response) => {
     if (req.isAuthenticated()) {
       const error = validationResult(req);
       const userId = req.user.id;
+      console.log(error);
       if (!error.isEmpty())
         return res.status(400).send("Folder Name cannot be empty luv");
       const { folderName } = matchedData(req);

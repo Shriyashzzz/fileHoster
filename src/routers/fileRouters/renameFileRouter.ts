@@ -16,6 +16,7 @@ renameFileRouter.post(
       const error = validationResult(req);
       if (!error.isEmpty()) return res.status(400).send(`${error}`);
       const { fileName } = matchedData(req);
+
       if (typeof fileId == "string") {
         const intFileId = parseInt(fileId);
         const isValidOwner = await queries.checkIfFileOwner(
