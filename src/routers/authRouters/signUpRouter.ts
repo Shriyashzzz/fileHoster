@@ -9,7 +9,7 @@ signUpRouter.get("/", (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.redirect("/");
   } else {
-    res.render("signup.ejs");
+    res.render("signUp.ejs");
   }
 });
 const emptyError = `cannot be empty!`;
