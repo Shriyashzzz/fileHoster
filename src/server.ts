@@ -20,6 +20,7 @@ import fileDetailsRouter from "./routers/fileRouters/getFIleDetails";
 import renameFileRouter from "./routers/fileRouters/renameFileRouter";
 import deleteFileRouter from "./routers/fileRouters/deleteFileRouter";
 import downloadFileRouter from "./routers/fileRouters/downloadFile";
+import multer from "multer";
 export const app = express();
 // express session config
 app.use(
@@ -70,9 +71,16 @@ app.use("/renameFile/:fileId", renameFileRouter);
 app.use("/deleteFile/:fileId", deleteFileRouter);
 app.use("/fileDownload/:fileId", downloadFileRouter);
 // Error Handler for server errors
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err);
-  res.send("Server Error: Please Try Again Later");
+// must be registered LAST, after all routes
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error("ERROR:", err);
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_FILE_SIZE") {
+      return res.status(413).send("File too large. Max size is 10MB.");
+    }
+    return res.status(400).send(`Upload error: ${err.message}`);
+  }
+  res.status(500).send("Something went wrong");
 });
 app.listen(config.port, () => {
   console.log(`Live: http://localhost:${config.port}`);

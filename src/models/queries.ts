@@ -163,6 +163,33 @@ class Queries {
       return { status: false };
     }
   }
+
+  async uploadFileMetaData(
+    givenFile: Express.Multer.File,
+    path: string,
+    folderId: number,
+    userId: number,
+  ): Promise<Boolean> {
+    try {
+      const file = await prisma.indvFile.create({
+        data: {
+          fileName: givenFile.originalname,
+          path: path,
+          size: givenFile.size,
+          mimetype: givenFile.mimetype,
+          folderId: folderId,
+          userId: userId,
+        },
+      });
+      if (file) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
 }
 
 const queries = new Queries();

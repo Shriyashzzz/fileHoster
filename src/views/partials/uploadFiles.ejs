@@ -23,6 +23,7 @@
     </svg>
     <p>Upload File</p>
   </label>
+  less than 10mb
   <input type="file" id="givenFile" name="givenFile" />
 </form>
 
@@ -31,13 +32,24 @@
   const uploadForm = document.querySelector("#uploadForm");
   fileInput.addEventListener("change", async (e) => {
     const formData = new FormData(uploadForm);
-    const response = await fetch(`/fileupload/${currentFolderId}`, {
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    if (data.redirectUrl) {
-      window.location.href = data.redirectUrl;
+    try {
+      const response = await fetch(`/fileupload/${currentFolderId}`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || "Upload failed");
+        return;
+      }
+
+      if (data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      }
+    } catch (err) {
+      console.error("Upload request failed:", err);
+      alert("Something went wrong uploading the file.");
     }
   });
 </script>

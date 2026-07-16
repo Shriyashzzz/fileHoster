@@ -5,15 +5,17 @@ import prisma from "../../controllers/config/prisma";
 import authCheckerMiddleware from "../../middlewares/checkIfAuth";
 import { createClient } from "@supabase/supabase-js";
 import config from "../../controllers/config/config";
+import getFileMetaData from "../../utils/getFileMetaData";
+import queries from "../../models/queries";
 // what is an multer ?
 // => node.js middleware for handling multipart/form-data
 // text goes to req.body and multipart goed to either req.file || re.files depending if it's one upload or multiple uploads
-
 //temporary memory to store file while uploading to supabase
 const storage = multer.memoryStorage();
+const maxSize = 10 * 1024 * 1024; // 10 * 1mb = 10mb
 export const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 },
+  limits: { fileSize: maxSize },
 });
 export const supabase = createClient(
   config.SUPABASE_URL,
@@ -24,54 +26,41 @@ fileUploadRouter.post(
   "/",
   authCheckerMiddleware,
   upload.single("givenFile"),
-  async (req: Request<{ folderId: string }>, res: Response) => {
-    if (!req.user) return res.status(401).send("Not authenticated");
-    const { folderId } = req.params;
-    const intFolderId = parseInt(folderId);
-    // make sure to validate the file size before uploading
-    if (req.file) {
-      //builds a unique filename so two people uploading photo.jpg don't overwrite each other.
-      const file = req.file;
-      const fileExt = file.originalname.split(".").pop();
-      //to ensure two fileNames do not clash in the supabase database
-      const fileName = `${Math.random()}-${crypto.randomUUID()}.${fileExt}`;
-      // uploads is the supabase bucket i'll be uploading this file to
-      const filePath = `uploads/${fileName}`;
-      // actually uploading the file to the database
+  async (req: Request, res: Response, next: NextFunction) => {
+    if (typeof req.params.folderId == "string") {
+      const intFolderId = parseInt(req.params.folderId);
+      if (!req.file) return res.status(400).send("Error: No file Uploaded");
+      const { file, fileExt, fileName, filePath } = getFileMetaData(req.file);
+      console.log(file);
       const { data, error } = await supabase.storage
         .from("clientFiles")
         .upload(filePath, file.buffer, {
           contentType: file.mimetype,
           upsert: false,
         });
-      if (error) {
-        console.log("SUPABASE UPLOAD ERROR:", JSON.stringify(error, null, 2));
-        //send error if could not upload to the supabase
-        return res.sendStatus(500);
+      if (error) return next(error);
+      const response = await queries.uploadFileMetaData(
+        file,
+        data.path,
+        intFolderId,
+        req.user!.id,
+      );
+      if (!response) {
+        await supabase.storage
+          .from("clientFiles")
+          .remove([file.path, fileName]);
+        return next(
+          new Error(
+            "Error uploading file to the database. Please Try again later",
+          ),
+        );
       } else {
-        //if no error
-        //upload to the prisma IndvFile Table
-        const indvFile = await prisma.indvFile.create({
-          data: {
-            fileName: req.file.originalname,
-            path: data.path,
-            size: req.file.size,
-            mimetype: req.file.mimetype,
-            folderId: intFolderId,
-            userId: req.user.id,
-          },
-        });
+        res.locals.universalId = intFolderId;
+        return res
+          .status(200)
+          .json({ redirectUrl: `/showFolder/${intFolderId}` });
       }
-      // set the current selected folder to the folder the new file has been uploaded to
-      res.locals.universalId = intFolderId;
-      return res.status(200).json({ redirectUrl: `/showFolder/${folderId}` });
-    } else {
-      //error message if no file was sent to the routes
-      return res.status(400).send("Error: No file Uploaded");
     }
   },
 );
-
 export default fileUploadRouter;
-
-// fix:  1. validate file size, 2. ensure there is roll back if either supabase/ prisma upload error occurs
