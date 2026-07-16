@@ -24,11 +24,7 @@ fileUploadRouter.post(
   "/",
   authCheckerMiddleware,
   upload.single("givenFile"),
-  async (
-    req: Request<{ folderId: string }>,
-    res: Response,
-    next: NextFunction,
-  ) => {
+  async (req: Request<{ folderId: string }>, res: Response) => {
     if (!req.user) return res.status(401).send("Not authenticated");
     const { folderId } = req.params;
     const intFolderId = parseInt(folderId);
@@ -38,7 +34,7 @@ fileUploadRouter.post(
       const file = req.file;
       const fileExt = file.originalname.split(".").pop();
       //to ensure two fileNames do not clash in the supabase database
-      const fileName = `${Math.random()}-${Date.now()}.${fileExt}`;
+      const fileName = `${Math.random()}-${crypto.randomUUID()}.${fileExt}`;
       // uploads is the supabase bucket i'll be uploading this file to
       const filePath = `uploads/${fileName}`;
       // actually uploading the file to the database
@@ -77,3 +73,5 @@ fileUploadRouter.post(
 );
 
 export default fileUploadRouter;
+
+// fix:  1. validate file size, 2. ensure there is roll back if either supabase/ prisma upload error occurs

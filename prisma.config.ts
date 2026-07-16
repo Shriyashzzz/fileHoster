@@ -8,6 +8,8 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: env("DATABASE_URL"), //this connection is only for prisma client generation and migration, make another connection for CRUD operations
+    url: env("DATABASE_URL"), //this connection is *only* for prisma client generation and migration, make another connection for CRUD operations
+    // get the connection url from supabase under prisma url section
+    //use a *seperate supabase client url* using supabse client library to connect to the supbase cloud storage service for blob datas. rn that connection is at ./routes/fileRouters/fileUploadRouters.ts
   },
 });
