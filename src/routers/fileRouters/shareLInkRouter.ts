@@ -12,7 +12,7 @@ const shareLinkRouter = Router({ mergeParams: true });
 
 const validationMiddleware = [
   body("totSelect").custom((value) => {
-    if (value == "1hr" || value == "12hr" || value == "1Day") {
+    if (value == "1hr" || value == "12hr" || value == "24hr") {
       return true;
     } else {
       throw new Error("Invalid Time Out Select");
@@ -27,7 +27,7 @@ shareLinkRouter.post(
   async (req: Request, res: Response, next: NextFunction) => {
     const validationError = validationResult(req);
     if (!validationError.isEmpty())
-      return res.send("Error Time Out Link Selection");
+      return res.send("Error:Incorrect Time Out Link Selection");
 
     const { totSelect } = matchedData(req);
     if (!(typeof req.params.fileId == "string"))
