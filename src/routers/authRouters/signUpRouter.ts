@@ -20,7 +20,7 @@ const validationMiddleware = [
     .notEmpty()
     .withMessage(` Username ${emptyError}`)
     .isLength({ min: 5 })
-    .withMessage("Username has to be atleast 5 charachthers long ")
+    .withMessage("Username has to be atleast 5 characters long ")
     .custom(async (rawUsername) => {
       const userExists = await queries.usernameExists(rawUsername);
       if (userExists) {
