@@ -1,4 +1,4 @@
-import type { Request, Response, Errback, NextFunction } from "express";
+import type { Request, Response, NextFunction } from "express";
 import express from "express";
 import config from "./controllers/config/config";
 import session from "express-session";
@@ -21,6 +21,7 @@ import renameFileRouter from "./routers/fileRouters/renameFileRouter";
 import deleteFileRouter from "./routers/fileRouters/deleteFileRouter";
 import downloadFileRouter from "./routers/fileRouters/downloadFile";
 import multer from "multer";
+import shareLinkRouter from "./routers/fileRouters/shareLInkRouter";
 export const app = express();
 // express session config
 app.use(
@@ -72,6 +73,7 @@ app.use("/deleteFile/:fileId", deleteFileRouter);
 app.use("/fileDownload/:fileId", downloadFileRouter);
 // Error Handler for server errors
 // must be registered LAST, after all routes
+app.use("/shareLink/:fileId", shareLinkRouter);
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error("ERROR:", err);
   if (err instanceof multer.MulterError) {

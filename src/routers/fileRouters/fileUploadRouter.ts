@@ -1,7 +1,6 @@
 import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import multer from "multer";
-import prisma from "../../controllers/config/prisma";
 import authCheckerMiddleware from "../../middlewares/checkIfAuth";
 import { createClient } from "@supabase/supabase-js";
 import config from "../../controllers/config/config";
@@ -11,6 +10,7 @@ import queries from "../../models/queries";
 // => node.js middleware for handling multipart/form-data
 // text goes to req.body and multipart goed to either req.file || re.files depending if it's one upload or multiple uploads
 //temporary memory to store file while uploading to supabase
+
 const storage = multer.memoryStorage();
 const maxSize = 10 * 1024 * 1024; // 10 * 1mb = 10mb
 export const upload = multer({

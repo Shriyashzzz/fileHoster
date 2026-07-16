@@ -23,6 +23,10 @@ body {
   align-items: center;
   height: 100dvh;
   max-width: 100%;
+  flex-direction: column;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+  gap: 4rem;
 }
 
 .fileDetailsContainer {
@@ -94,7 +98,8 @@ body {
   font-size: 13px;
 }
 
-.downloadFileBtn {
+.downloadFileBtn,
+.shareFileBtn {
   margin-top: 18px;
   display: flex;
   align-items: center;
@@ -112,11 +117,17 @@ body {
     background 0.18s ease,
     transform 0.18s ease;
 }
+.shareFileBtn {
+  width: 100%;
+  border: none;
+}
 
-.downloadFileBtn:hover {
+.downloadFileBtn:hover,
+.shareFileBtn:hover {
   background: #3a3dbe;
 }
-.downloadFileBtn:active {
+.downloadFileBtn:active,
+.shareFileBtn:active {
   transform: scale(0.98);
 }
 .downloadFileBtn svg {
@@ -124,4 +135,41 @@ body {
 }
 .downloadFileBtn:hover svg {
   transform: translateY(3px);
+}
+
+.shareLinkResult {
+  margin-left: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  max-width: 350px;
+  width: 100%;
+}
+.shareLinkResult input {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  border: 1px solid #e4e6ef;
+  border-radius: 6px;
+  background: #3a3838;
+  color: var(--text-color);
+}
+.shareLinkResult button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #4b4fe0;
+  color: var(--text-color);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+.shareLinkResult button:hover {
+  background: #3a3dbe;
 }
