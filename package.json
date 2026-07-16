@@ -6,7 +6,6 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "passport": "^0.7.0",
     "dev": "tsx watch src/server.ts",
     "lint": "eslint 'src/**/*.ts'"
   },
@@ -19,10 +18,11 @@
     "@prisma/client": "^7.8.0",
     "@quixo3/prisma-session-store": "^3.1.21",
     "@supabase/supabase-js": "^2.110.6",
-    "@types/express-session": "^1.19.0",
     "bcryptjs": "^3.0.3",
     "connect-flash": "^0.1.1",
+    "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
+    "express": "^5.2.1",
     "express-session": "^1.19.0",
     "express-validator": "^7.3.2",
     "multer": "^2.2.0",
@@ -33,19 +33,14 @@
   "devDependencies": {
     "@types/connect-flash": "^0.0.40",
     "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
     "@types/multer": "^2.2.0",
     "@types/node": "^26.1.1",
     "@types/passport": "^1.0.17",
     "@types/passport-local": "^1.0.38",
-    "dotenv": "^17.4.2",
     "eslint": "^10.6.0",
-    "express": "^5.2.1",
-    "install": "^0.13.0",
-    "nodemon": "^3.1.14",
-    "npm": "^12.0.0",
     "prettier": "^3.9.5",
     "prisma": "^7.8.0",
-    "ts-node": "^10.9.2",
     "tsx": "^4.23.0",
     "typescript": "^7.0.2"
   }
