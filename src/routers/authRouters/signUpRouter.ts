@@ -70,7 +70,7 @@ signUpRouter.post(
       res.redirect("/login");
     } else {
       console.log(errors);
-      res.render("signup.ejs", { errors: errors.array() });
+      res.render("signUp.ejs", { errors: errors.array() });
     }
   },
 );
