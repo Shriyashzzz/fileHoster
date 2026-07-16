@@ -424,6 +424,7 @@ main {
   display: flex;
   flex-direction: column;
   flex: 0.3;
+  max-width: 450px;
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -773,20 +774,10 @@ main {
 }
 
 @media screen and (max-width: 587px) {
-  #renameDialog {
-    width: 92%;
-    padding: 1rem;
-  }
-}
-
-@media screen and (max-width: 587px) {
   #newFolderDialog {
     width: 92%;
     padding: 1rem;
   }
-}
-
-@media screen and (max-width: 587px) {
   .foldersBox {
     padding-left: 2px;
   }
@@ -801,5 +792,9 @@ main {
         text-overflow: ellipsis;
       }
     }
+  }
+  #renameDialog {
+    width: 92%;
+    padding: 1rem;
   }
 }

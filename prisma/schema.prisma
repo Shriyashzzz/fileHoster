@@ -7,6 +7,9 @@ datasource db {
   provider = "postgresql"
 }
 
+// Follow this article to migrate on supabase using prisma
+// https://supabase.com/docs/guides/database/prisma?queryGroups=initiate&initiate=npm_initiate
+
 model Users {
   id        Int        @id @default(autoincrement())
   createdAt DateTime   @default(now())

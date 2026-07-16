@@ -2,7 +2,7 @@ import { Router, type Request, type Response } from "express";
 import queries from "../../models/queries";
 
 const renameFileRouter = Router({ mergeParams: true });
-
+// make sure to validate incoming fileName later
 renameFileRouter.post("/", async (req: Request, res: Response) => {
   const { fileId } = req.params;
   const { fileName } = req.body;

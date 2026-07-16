@@ -2,7 +2,7 @@ import { Router, type Request, type Response } from "express";
 import queries from "../../models/queries";
 import { upload } from "../fileRouters/fileUploadRouter";
 const newFolderRouter = Router({ mergeParams: true });
-
+//make sure to validate folderName later
 newFolderRouter.post(
   "/",
   upload.none(),

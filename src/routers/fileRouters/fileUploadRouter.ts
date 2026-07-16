@@ -23,6 +23,7 @@ fileUploadRouter.post(
     if (!req.user) return res.status(401).send("Not authenticated");
     const { folderId } = req.params;
     const id = parseInt(folderId);
+    // make suret or validate the file size before uploading
     if (req.file) {
       try {
         const indvFile = await prisma.indvFile.create({
