@@ -31,8 +31,9 @@ app.use(
     saveUninitialized: false,
     // store for persistace of session storage
     cookie: {
-      maxAge: 1000 * 60 * 30,
+      maxAge: 1000 * 60 * 30 * 30,
       secure: config.nodeEnv == "PROD" ? true : false,
+      httpOnly: true,
     },
     store: new PrismaSessionStore(prisma, {
       checkPeriod: 60 * 60 * 1000, //ms
