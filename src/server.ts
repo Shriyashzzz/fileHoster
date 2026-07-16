@@ -42,6 +42,7 @@ app.use(
   }),
 );
 app.use(flash());
+app.set("trust proxy", true);
 app.use(express.urlencoded({ extended: true }));
 app.set("views", path.join(import.meta.dirname, "views"));
 app.set("view engine", "ejs");
