@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
+    <link rel="stylesheet" href="/auth.css">
+
   </head>
   <body>
     <div class = 'authContainer'> 
@@ -17,16 +19,16 @@
         <label for="cpassword">Confirm Password: </label>
         <input type="password" id = "cpassword"  name="cpassword" />
         <button type="submit">Sign up</button>
-        <ul>
-          <% if (locals.errors) { %>
+         <% if (locals.errors) { %>
+            <ul>
               <% errors.map((error)=>{%>
                   <li><%= error.msg %></li>
-            <%  }) %>
-          <% } %>
-        </ul>
+              <%  }) %>
+            </ul>
+           <% } %>
 
       </form>
-      <div>Already have a account?</div><a href="/login">Sign In
+      <div class ="askIfAccount">Already have a account?</div><a href="/login">Sign In
       </a>
     </div>
   </body>

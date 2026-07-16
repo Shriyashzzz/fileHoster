@@ -570,6 +570,11 @@ main {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid transparent;
+    &&:hover {
+      border-bottom-color: var(--text-color);
+    }
     a {
       letter-spacing: 1px;
       width: 300px;
