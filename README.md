@@ -48,3 +48,5 @@ Likewise I use supabase's own client similar to prisma to peform CRUD operations
 | DATABASE_URL        | Psql Database URL from your Database Hosting Provider. Local for "DEV" Enviroment |
 | SUPABASE_URL        |      Supabase Url used by supabase client to talk to perform CRUD operations      |
 | SUPBASE_SERIVCE_KEY |              Service key found undre container's API Key's Settings               |
+
+_Made while learning through the Odin Project. Give it a star if you liked this project. plewaseeee plweaseee give me a star hehe_
