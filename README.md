@@ -34,11 +34,13 @@ Likewise I use supabase's own client similar to prisma to peform CRUD operations
 
 # Preview
 
-![Alt text](/app_preview/Screenshot%202026-07-16%20at%209.51.17%20PM.png "Optional Title")
-![Alt text](/app_preview/Screenshot%202026-07-16%20at%209.51.34%20PM.png "Optional Title")
-![Alt text](/app_preview/Screenshot%202026-07-16%20at%209.51.44%20PM.png "Optional Title")
-![Alt text](/app_preview/Screenshot%202026-07-16%20at%209.51.58%20PM.png "Optional Title")
-![Alt text](/app_preview/Screenshot%202026-07-16%20at%209.52.07%20PM.png "Optional Title")
+![Alt text](/app_preview/homePage.png "Home Page")
+![Alt text](/app_preview/newFolder.png "Add Folder")
+![Alt text](/app_preview/fileDetails.png "File Details")
+![Alt text](/app_preview/totFile.png "Share File")
+![Alt text](/app_preview/shareLink.png "Signed Link")
+![Alt text](/app_preview/logIn.png "Authentication")
+![Alt text](/app_preview/signUp.png "Create User")
 
 | ENV VARIABLES       |                                    EXPLANATON                                     |
 | ------------------- | :-------------------------------------------------------------------------------: |
